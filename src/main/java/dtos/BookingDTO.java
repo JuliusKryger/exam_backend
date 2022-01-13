@@ -1,56 +1,42 @@
-package entities;
+package dtos;
+
+import entities.User;
+import entities.WashingAssistant;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "booking")
-@NamedQueries({
-        @NamedQuery(name = "Booking.info", query = "SELECT b from Booking b where b.user.userName = :userName")
-})
-public class Booking implements Serializable {
-    private static final long serialVersionUID = -1210755182239996033L;
+public class BookingDTO {
 
     //Variables
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
-
-    @Column(name = "appointment", nullable = false)
     private String appointment;
-
-    @Column(name = "duration", nullable = false)
     private int duration;
-
-    @ManyToOne
     private User user;
-
-    @ManyToMany
     private List<WashingAssistant> washingAssistantList = new ArrayList<>();
 
     //Constructor
 
-    public Booking() {
-    }
-
-    public Booking(String appointment, int duration, User user, List<WashingAssistant> washingAssistantList) {
+    public BookingDTO(Long id, String appointment, int duration, User user, List<WashingAssistant> washingAssistantList) {
+        this.id = id;
         this.appointment = appointment;
         this.duration = duration;
         this.user = user;
         this.washingAssistantList = washingAssistantList;
     }
 
-    public Booking(String appointment, int duration, User user) {
+    public BookingDTO(String appointment, int duration, User user, List<WashingAssistant> washingAssistantList) {
         this.appointment = appointment;
         this.duration = duration;
         this.user = user;
+        this.washingAssistantList = washingAssistantList;
     }
 
-    //Getters and Setters
+
+    //Getters And Setters
+
 
     public Long getId() {
         return id;
@@ -92,33 +78,16 @@ public class Booking implements Serializable {
         this.washingAssistantList = washingAssistantList;
     }
 
-    //Methods
-
-    public void addWashingAssistant (WashingAssistant washingAssistant) {
-        washingAssistantList.add(washingAssistant);
-    }
-
-    public List<String> getWashingAssistantAsStrings() {
-        if (washingAssistantList.isEmpty()) {
-            return null;
-        }
-        List<String> washingAssistantsAsStrings = new ArrayList<>();
-        washingAssistantList.forEach((wa) -> {
-            washingAssistantsAsStrings.add(wa.getName());
-        });
-        return washingAssistantsAsStrings;
-    }
-
     //toString
-
 
     @Override
     public String toString() {
-        return "Booking{" +
+        return "BookingDTO{" +
                 "id=" + id +
                 ", appointment='" + appointment + '\'' +
                 ", duration=" + duration +
                 ", user=" + user +
+                ", washingAssistantList=" + washingAssistantList +
                 '}';
     }
 }

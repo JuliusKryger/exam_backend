@@ -30,6 +30,7 @@ public class WashingAssistantDTO {
     }
 
     public WashingAssistantDTO(WashingAssistant entity) {
+        this.id = entity.getId();
         this.name = entity.getName();
         this.primaryLanguage = entity.getPrimaryLanguage();
         this.yearsOfExperience = entity.getYearsOfExperience();

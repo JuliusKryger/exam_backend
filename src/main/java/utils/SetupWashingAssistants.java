@@ -7,6 +7,7 @@ import entities.WashingAssistant;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.util.List;
 
 public class SetupWashingAssistants {
 
@@ -26,9 +27,12 @@ public class SetupWashingAssistants {
 
         //String appointment, int duration, User user
         Booking b1 = new Booking("12-01-2022 12:30", 30, user);
+        b1.addWashingAssistant(wa1);
 
         em.getTransaction().begin();
         em.persist(wa1);
+        em.persist(b1);
+
         em.persist(wa2);
         em.persist(wa3);
 
@@ -36,7 +40,8 @@ public class SetupWashingAssistants {
         em.persist(userRole);
         em.persist(user);
 
-        em.persist(b1);
+        //b1.addWashingAssistant(wa1);
+
         em.getTransaction().commit();
     }
 }

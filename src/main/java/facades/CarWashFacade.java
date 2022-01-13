@@ -59,6 +59,23 @@ public class CarWashFacade {
         return washingAssistant;
     }
 
+    public Booking createBooking (Booking booking) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            booking.setAppointment(booking.getAppointment());
+            booking.setDuration(booking.getDuration());
+            booking.setWashingAssistantList(booking.getWashingAssistantList());
+            booking.setUser(booking.getUser());
+            em.persist(booking);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+
+        return booking;
+    }
+
     public Booking getUsersBookings (String userName) {
         EntityManager em = emf.createEntityManager();
         try {

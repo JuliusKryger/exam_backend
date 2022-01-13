@@ -2,6 +2,7 @@ package entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "washing_assistant")
@@ -29,6 +30,9 @@ public class WashingAssistant implements Serializable {
 
     @Column(name = "pricePerHour", nullable = false)
     private int pricePerHour;
+
+    @ManyToMany(mappedBy = "washingAssistantList")
+    private List<Booking> bookingList;
 
     //Constructors
 
