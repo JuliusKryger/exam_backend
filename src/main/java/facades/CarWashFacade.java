@@ -42,6 +42,23 @@ public class CarWashFacade {
         }
     }
 
+    public WashingAssistant createWashingAssistant (WashingAssistant washingAssistant) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            washingAssistant.setName(washingAssistant.getName());
+            washingAssistant.setPrimaryLanguage(washingAssistant.getPrimaryLanguage());
+            washingAssistant.setYearsOfExperience(washingAssistant.getYearsOfExperience());
+            washingAssistant.setPricePerHour(washingAssistant.getPricePerHour());
+            em.persist(washingAssistant);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+
+        return washingAssistant;
+    }
+
     public Booking getUsersBookings (String userName) {
         EntityManager em = emf.createEntityManager();
         try {
