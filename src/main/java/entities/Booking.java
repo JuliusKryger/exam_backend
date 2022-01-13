@@ -1,5 +1,8 @@
 package entities;
 
+import dtos.BookingDTO;
+import dtos.WashingAssistantDTO;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -37,17 +40,17 @@ public class Booking implements Serializable {
     public Booking() {
     }
 
+    public Booking(String appointment, int duration, User user) {
+        this.appointment = appointment;
+        this.duration = duration;
+        this.user = user;
+    }
+
     public Booking(String appointment, int duration, User user, List<WashingAssistant> washingAssistantList) {
         this.appointment = appointment;
         this.duration = duration;
         this.user = user;
         this.washingAssistantList = washingAssistantList;
-    }
-
-    public Booking(String appointment, int duration, User user) {
-        this.appointment = appointment;
-        this.duration = duration;
-        this.user = user;
     }
 
     //Getters and Setters
@@ -92,11 +95,13 @@ public class Booking implements Serializable {
         this.washingAssistantList = washingAssistantList;
     }
 
+
     //Methods
 
     public void addWashingAssistant (WashingAssistant washingAssistant) {
         washingAssistantList.add(washingAssistant);
     }
+
 
     public List<String> getWashingAssistantAsStrings() {
         if (washingAssistantList.isEmpty()) {

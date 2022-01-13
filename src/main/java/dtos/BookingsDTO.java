@@ -1,6 +1,6 @@
 package dtos;
 
-import entities.WashingAssistant;
+import entities.Booking;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,14 +11,14 @@ public class BookingsDTO {
     List<BookingDTO> all = new ArrayList();
 
     //Constructors
-    public WashingAssistantsDTO(List<WashingAssistant> washingAssistantList) {
-        washingAssistantList.forEach((wa) -> {
-            all.add(new WashingAssistantDTO(wa));
+    public BookingsDTO(List<Booking> bookingList) {
+        bookingList.forEach((b) -> {
+            all.add(new BookingDTO(b));
         });
     }
 
     //methods
-    public List<WashingAssistantDTO> getAll() {
+    public List<BookingDTO> getAll() {
         return all;
     }
 

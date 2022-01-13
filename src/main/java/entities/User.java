@@ -11,19 +11,23 @@ import org.mindrot.jbcrypt.BCrypt;
 
 @Entity
 @Table(name = "users")
+@NamedQueries({
+        @NamedQuery(name = "User.getAllRows", query = "SELECT u from User u")
+})
 public class User implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "user_name", length = 25)
     private String userName;
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "user_pass")
     private String userPass;
+
     @JoinTable(name = "user_roles", joinColumns = {
             @JoinColumn(name = "user_name", referencedColumnName = "user_name")}, inverseJoinColumns = {
             @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
@@ -32,6 +36,22 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Booking> bookings = new ArrayList<>();
+
+    /** Constructor **/
+
+    public User() {
+    }
+
+    public User(String userName, String userPass) {
+        this.userName = userName;
+        this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
+    }
+
+    public User(String userName) {
+        this.userName = userName;
+    }
+
+    /** Methods **/
 
     public void addBooking(Booking booking) {
         bookings.add(booking);
@@ -48,20 +68,11 @@ public class User implements Serializable {
         return rolesAsStrings;
     }
 
-    public User() {
-    }
-
-    //TODO Change when password is hashed
     public boolean verifyPassword(String pw) {
         return (BCrypt.checkpw(pw, userPass));
     }
 
-    public User(String userName, String userPass) {
-        this.userName = userName;
-
-        this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
-    }
-
+    /** Getters and setters **/
 
     public String getUserName() {
         return userName;

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import dtos.BookingsDTO;
 import dtos.WashingAssistantsDTO;
 import entities.Booking;
 import entities.User;
@@ -40,9 +41,9 @@ public class CarWashResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("bookings/{userName}")
-    public String getFoodPlan(@PathParam("userName") String userName) {
+    public String getUserBookings(@PathParam("userName") String userName) {
         System.out.println(userName);
-        Booking booking = instance.getUsersBookings(userName);
+        BookingsDTO booking = instance.getUsersBookings(userName);
         return GSON.toJson(booking);
     }
 

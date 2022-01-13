@@ -1,9 +1,9 @@
 package dtos;
 
+import entities.Booking;
 import entities.User;
 import entities.WashingAssistant;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,23 +15,31 @@ public class BookingDTO {
     private String appointment;
     private int duration;
     private User user;
-    private List<WashingAssistant> washingAssistantList = new ArrayList<>();
+    //private List<WashingAssistant> washingAssistantList = new ArrayList<>();
 
     //Constructor
 
-    public BookingDTO(Long id, String appointment, int duration, User user, List<WashingAssistant> washingAssistantList) {
+
+    public BookingDTO(Long id, String appointment, int duration, User user) {
         this.id = id;
         this.appointment = appointment;
         this.duration = duration;
         this.user = user;
-        this.washingAssistantList = washingAssistantList;
+        //this.washingAssistantList = washingAssistantList;
     }
 
-    public BookingDTO(String appointment, int duration, User user, List<WashingAssistant> washingAssistantList) {
+    public BookingDTO(String appointment, int duration, User user) {
         this.appointment = appointment;
         this.duration = duration;
         this.user = user;
-        this.washingAssistantList = washingAssistantList;
+        //this.washingAssistantList = washingAssistantList;
+    }
+
+    public BookingDTO(Booking entity) {
+        this.appointment = entity.getAppointment();
+        this.duration = entity.getDuration();
+        this.user = entity.getUser();
+        //this.washingAssistantList = entity.getWashingAssistantList(); // != null ? hmm : new ArrayList<>()
     }
 
 
@@ -70,13 +78,15 @@ public class BookingDTO {
         this.user = user;
     }
 
-    public List<WashingAssistant> getWashingAssistantList() {
+    /*
+    public List<WashingAssistantDTO> getWashingAssistantList() {
         return washingAssistantList;
     }
 
-    public void setWashingAssistantList(List<WashingAssistant> washingAssistantList) {
+    public void setWashingAssistantList(List<WashingAssistantDTO> washingAssistantList) {
         this.washingAssistantList = washingAssistantList;
     }
+     */
 
     //toString
 
@@ -87,7 +97,7 @@ public class BookingDTO {
                 ", appointment='" + appointment + '\'' +
                 ", duration=" + duration +
                 ", user=" + user +
-                ", washingAssistantList=" + washingAssistantList +
+                //", washingAssistantList=" + washingAssistantList +
                 '}';
     }
 }

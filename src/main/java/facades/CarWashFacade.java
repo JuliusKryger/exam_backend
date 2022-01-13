@@ -1,5 +1,7 @@
 package facades;
 
+import dtos.BookingDTO;
+import dtos.BookingsDTO;
 import dtos.WashingAssistantsDTO;
 import entities.Booking;
 import entities.WashingAssistant;
@@ -76,20 +78,15 @@ public class CarWashFacade {
         return booking;
     }
 
-    public Booking getUsersBookings (String userName) {
+    public BookingsDTO getUsersBookings (String userName) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
             TypedQuery<Booking> typedQuery = em.createNamedQuery("Booking.info", Booking.class);
             typedQuery.setParameter("userName", userName);
-            Booking booking = typedQuery.getSingleResult();
-            if (booking != null) {
-                bk.setAppointment(booking.getAppointment());
-                bk.setDuration(booking.getDuration());
-                return bk;
-            } else {
-                throw new WebApplicationException("User has no bookings", 400);
-            }
+            List<Booking> resultList = typedQuery.getResultList();
+            BookingsDTO dto = new BookingsDTO(resultList);
+            return dto;
         } finally {
             em.close();
         }
