@@ -3,6 +3,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtos.WashingAssistantsDTO;
+import entities.Booking;
 import facades.CarWashFacade;
 import utils.EMF_Creator;
 
@@ -27,6 +28,15 @@ public class CarWashResource {
         return GSON.toJson(wa);
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("bookings/{userName}")
+    public String getFoodPlan(@PathParam("userName") String userName) {
+        System.out.println(userName);
+        Booking booking = instance.getUsersBookings(userName);
+        return GSON.toJson(booking);
+    }
 
 
 

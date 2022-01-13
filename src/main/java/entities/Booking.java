@@ -5,6 +5,9 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "booking")
+@NamedQueries({
+        @NamedQuery(name = "Booking.info", query = "SELECT b from Booking b where b.user.userName = :userName")
+})
 public class Booking implements Serializable {
     private static final long serialVersionUID = -1210755182239996033L;
 
@@ -33,6 +36,11 @@ public class Booking implements Serializable {
         this.appointment = appointment;
         this.duration = duration;
         this.user = user;
+    }
+
+    public Booking(String appointment, int duration) {
+        this.appointment = appointment;
+        this.duration = duration;
     }
 
     //Getters and Setters
