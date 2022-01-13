@@ -5,6 +5,9 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "washing_assistant")
+@NamedQueries({
+        @NamedQuery(name = "WashingAssistant.getAllRows", query = "SELECT w from WashingAssistant w")
+})
 public class WashingAssistant implements Serializable {
     private static final long serialVersionUID = 5994110863150984796L;
 

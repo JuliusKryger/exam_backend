@@ -1,5 +1,7 @@
 package dtos;
 
+import entities.WashingAssistant;
+
 public class WashingAssistantDTO {
 
     //Variables
@@ -25,6 +27,13 @@ public class WashingAssistantDTO {
         this.primaryLanguage = primaryLanguage;
         this.yearsOfExperience = yearsOfExperience;
         this.pricePerHour = pricePerHour;
+    }
+
+    public WashingAssistantDTO(WashingAssistant entity) {
+        this.name = entity.getName();
+        this.primaryLanguage = entity.getPrimaryLanguage();
+        this.yearsOfExperience = entity.getYearsOfExperience();
+        this.pricePerHour = entity.getPricePerHour();
     }
 
     //getters and setters
