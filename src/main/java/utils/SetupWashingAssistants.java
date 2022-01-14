@@ -36,10 +36,6 @@ public class SetupWashingAssistants {
         em.persist(wa2);
         em.persist(wa3);
 
-        user.addRole(userRole);
-        em.persist(userRole);
-        em.persist(user);
-
         //b1.addWashingAssistant(wa1);
 
         em.getTransaction().commit();

@@ -78,15 +78,15 @@ public class CarWashFacade {
         return booking;
     }
 
-    public BookingsDTO getUsersBookings (String userName) {
+    public BookingDTO getUsersBookings (String userName) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
             TypedQuery<Booking> typedQuery = em.createNamedQuery("Booking.info", Booking.class);
             typedQuery.setParameter("userName", userName);
-            List<Booking> resultList = typedQuery.getResultList();
-            BookingsDTO dto = new BookingsDTO(resultList);
-            return dto;
+            Booking result = typedQuery.getSingleResult();
+            BookingDTO booking = new BookingDTO(result);
+            return booking;
         } finally {
             em.close();
         }

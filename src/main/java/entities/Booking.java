@@ -87,6 +87,7 @@ public class Booking implements Serializable {
         this.user = user;
     }
 
+
     public List<WashingAssistant> getWashingAssistantList() {
         return washingAssistantList;
     }
@@ -113,6 +114,7 @@ public class Booking implements Serializable {
         });
         return washingAssistantsAsStrings;
     }
+
 
     //toString
 
