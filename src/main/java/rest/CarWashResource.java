@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import dtos.BookingDTO;
-import dtos.BookingsDTO;
 import dtos.WashingAssistantsDTO;
 import entities.Booking;
 import entities.User;
@@ -19,7 +18,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.awt.print.Book;
 
 @Path("carwash")
 public class CarWashResource {
